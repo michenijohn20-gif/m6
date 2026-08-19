@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
+import "../styles/search.css";
+
 export default function SearchBar({ placeholder = "Search a product, e.g. Samsung A51" }) {
   const [searchParams] = useSearchParams();
   const [query, setQuery] = useState(searchParams.get("q") || "");

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { logout } from "../store/authSlice";
+import "../styles/navbar.css";
 import SearchBar from "./SearchBar";
 
 export default function Navbar() {

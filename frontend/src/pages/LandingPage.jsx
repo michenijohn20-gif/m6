@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 
+import "../styles/landing.css";
+
 const EXAMPLES = ["Samsung A51", "Bluedio Headphones"];
 
 const FEATURES = [

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import { login, register } from "../store/authSlice";
+import "../styles/auth.css";
 
 export default function AuthPage() {
   const [mode, setMode] = useState("signin"); // signin | signup

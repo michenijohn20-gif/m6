@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { fetchHistory } from "../store/historySlice";
+import "../styles/layout.css";
+import "../styles/history.css";
 
 export default function HistoryPage() {
   const dispatch = useDispatch();

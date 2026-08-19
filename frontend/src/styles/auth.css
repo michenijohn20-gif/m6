@@ -1,0 +1,108 @@
+.auth-page {
+  display: flex;
+  justify-content: center;
+  padding: 3rem 1.5rem;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 380px;
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  padding: 1.75rem;
+}
+
+.auth-tabs {
+  display: flex;
+  background: var(--color-surface);
+  border-radius: 999px;
+  padding: 0.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.auth-tab {
+  flex: 1;
+  padding: 0.5rem 0;
+  border: none;
+  background: none;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.auth-tab.active {
+  background: var(--color-blue);
+  color: #fff;
+}
+
+.auth-subtitle {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  margin: 0 0 1.25rem;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.auth-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.auth-field input {
+  padding: 0.65rem 0.85rem;
+  font-size: 1rem;
+  font-weight: 400;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.auth-field input:focus {
+  outline: none;
+  border-color: var(--color-blue);
+  background: #fff;
+}
+
+.auth-error {
+  margin: 0;
+  padding: 0.6rem 0.8rem;
+  font-size: 0.85rem;
+  color: var(--color-error);
+  background: #fbeeea;
+  border-radius: var(--radius);
+}
+
+.auth-submit {
+  padding: 0.75rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  background: var(--color-blue);
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.auth-submit:hover:not(:disabled) {
+  background: var(--color-blue-dark);
+}
+
+.auth-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

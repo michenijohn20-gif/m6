@@ -1,6 +1,8 @@
 import { useSelector } from "react-redux";
 
 import ProductCard from "./ProductCard";
+import "../styles/search.css";
+import "../styles/layout.css";
 
 export default function ResultsList() {
   const { results, status, error, query } = useSelector((state) => state.search);

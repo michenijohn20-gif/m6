@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { rerankResults } from "../store/searchSlice";
 import { setPriceRange, setWeight } from "../store/filtersSlice";
+import "../styles/search.css";
 
 const LABELS = {
   rating: "Rating",

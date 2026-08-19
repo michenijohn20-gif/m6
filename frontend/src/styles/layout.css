@@ -1,0 +1,45 @@
+/* Generic page wrapper shared by SearchPage and HistoryPage.
+   Rarely changes — page-specific styling belongs in that page's own file. */
+
+.page {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 3rem;
+}
+
+.page-intro {
+  color: var(--color-text-muted);
+  margin: 0 0 1.5rem;
+  font-size: 1.05rem;
+}
+
+.page-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+/* Generic message box, used across search results, history, and reviews. */
+
+.results-message {
+  color: var(--color-text-muted);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  margin: 0;
+  align-self: flex-start;
+}
+
+.results-message.error {
+  color: var(--color-error);
+  background: #fbeeea;
+  border-color: #f0d6cd;
+}
+
+@media (min-width: 640px) {
+  .page-body {
+    flex-direction: row;
+  }
+}

@@ -1,3 +1,5 @@
+import "../styles/search.css";
+
 const formatKsh = (amount) =>
   amount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 

@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { SITES } from "../constants";
 import { addReview, fetchReviews } from "../store/reviewsSlice";
+import "../styles/reviews.css";
+import "../styles/layout.css";
 
 export default function ReviewsPanel({ query }) {
   const dispatch = useDispatch();

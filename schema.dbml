@@ -1,25 +1,36 @@
+// BlueCart Marketplace — persisted schema
+// Only registered-user data lives here. Product listings from Amazon/eBay/
+// Shopify/Alibaba are fetched live per search and never written to the DB
+// (see backend/services/crawler.py + backend/routes/search.py).
+
 Table users {
-  id integer [primary key]
-  email varchar
-  password_hash varchar
-  created_at timestamp
+  id integer [primary key, increment]
+  email varchar(120) [not null, unique]
+  password_hash varchar(255) [not null]
+  created_at timestamp [default: `now()`]
+
+  Note: 'A registered account. Password is bcrypt-hashed, never stored raw.'
 }
 
 Table search_history {
-  id integer [primary key]
-  user_id integer
-  search_query varchar
-  searched_at timestamp
+  id integer [primary key, increment]
+  user_id integer [not null]
+  search_query varchar(255) [not null]
+  searched_at timestamp [default: `now()`]
+
+  Note: 'One row per search a logged-in user runs. Guests (no JWT) are not logged.'
 }
 
 Table reviews {
-  id integer [primary key]
-  product_query varchar
-  shop varchar
-  author varchar
-  comment text
-  rating float
-  created_at timestamp
+  id integer [primary key, increment]
+  product_query varchar(255) [not null]
+  shop varchar(120) [not null]
+  author varchar(120) [not null]
+  comment text [not null]
+  rating float [not null]
+  created_at timestamp [default: `now()`]
+
+  Note: 'User-submitted review for a (product_query, shop) pair. No login required to post; matched to search results by product_query + shop, not a foreign key, since listings themselves are never persisted.'
 }
 
 Ref: search_history.user_id > users.id
