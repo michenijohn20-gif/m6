@@ -21,15 +21,3 @@ class SearchHistory(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     search_query = db.Column(db.String(255), nullable=False)
     searched_at = db.Column(db.DateTime, default=datetime.utcnow)
-
-
-class Review(db.Model):
-    __tablename__ = "reviews"
-
-    id = db.Column(db.Integer, primary_key=True)
-    product_query = db.Column(db.String(255), nullable=False)
-    shop = db.Column(db.String(120), nullable=False)
-    author = db.Column(db.String(120), nullable=False)
-    comment = db.Column(db.Text, nullable=False)
-    rating = db.Column(db.Float, nullable=False)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)

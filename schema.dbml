@@ -21,16 +21,4 @@ Table search_history {
   Note: 'One row per search a logged-in user runs. Guests (no JWT) are not logged.'
 }
 
-Table reviews {
-  id integer [primary key, increment]
-  product_query varchar(255) [not null]
-  shop varchar(120) [not null]
-  author varchar(120) [not null]
-  comment text [not null]
-  rating float [not null]
-  created_at timestamp [default: `now()`]
-
-  Note: 'User-submitted review for a (product_query, shop) pair. No login required to post; matched to search results by product_query + shop, not a foreign key, since listings themselves are never persisted.'
-}
-
 Ref: search_history.user_id > users.id
