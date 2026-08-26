@@ -106,3 +106,45 @@
   opacity: 0.6;
   cursor: not-allowed;
 }
+
+.auth-forgot {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.auth-forgot-link {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-blue);
+  text-decoration: none;
+}
+
+.auth-forgot-link:hover {
+  color: var(--color-blue-dark);
+  text-decoration: underline;
+}
+
+.auth-forgot-success {
+  margin: 0;
+  padding: 0.6rem 0.8rem;
+  font-size: 0.85rem;
+  color: var(--color-text);
+  background: var(--color-surface);
+  border-radius: var(--radius);
+}
+
+.auth-back-link {
+  display: inline-block;
+  margin-top: 1.25rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  text-align: center;
+  width: 100%;
+}
+
+.auth-back-link:hover {
+  color: var(--color-blue);
+  text-decoration: underline;
+}

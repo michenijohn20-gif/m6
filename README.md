@@ -52,8 +52,10 @@ Runs on `http://localhost:5173` and talks to the backend via `VITE_API_URL`.
 
 ## Notes
 
-- `backend/services/crawler.py` currently returns mock listings shaped like a
-  real API response for 4 sites (Amazon, eBay, Shopify, Alibaba) — swap each
-  `fetch_from_*` function for a real API call when credentials are available.
+- `backend/services/crawler.py` calls real external APIs for 3 sites: Amazon
+  and AliExpress via RapidAPI-hosted third-party wrappers, and eBay via its
+  official Browse API (OAuth2 client-credentials). A site with no API key
+  configured, or whose request fails, is simply omitted from results rather
+  than failing the search — see `backend/.env.example` for the required vars.
 - `backend/services/mb_cb.py` holds the ranking formula; weights can be
   overridden per-request from the frontend's filter panel.

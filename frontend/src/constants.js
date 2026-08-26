@@ -1,1 +1,1 @@
-export const SITES = ["Amazon", "eBay", "Shopify", "Alibaba"];
+export const SITES = ["Amazon", "AliExpress", "eBay"];
