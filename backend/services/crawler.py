@@ -44,6 +44,12 @@ def _is_relevant(query, title):
     return any(word in title_lower for word in query_words)
 
 
+def _absolute_url(url):
+    """AliExpress returns protocol-relative URLs ("//...") for links/images."""
+    url = url or ""
+    return f"https:{url}" if url.startswith("//") else url or None
+
+
 def _parse_float(value):
     if value is None:
         return None
@@ -97,6 +103,7 @@ def fetch_from_amazon(query):
             "num_ratings": int(product.get("product_num_ratings") or 0),
             "pay_on_delivery": False,
             "url": product.get("product_url"),
+            "image": product.get("product_photo"),
         }
     return None
 
@@ -135,7 +142,6 @@ def fetch_from_aliexpress(query, _retries=2):
         title = item.get("title", query)
         if price_usd is None or not _is_relevant(query, title):
             continue
-        item_url = item.get("itemUrl") or ""
         return {
             "site": "AliExpress",
             "title": title,
@@ -146,7 +152,8 @@ def fetch_from_aliexpress(query, _retries=2):
             # No review-count field in this response tier.
             "num_ratings": 0,
             "pay_on_delivery": False,
-            "url": f"https:{item_url}" if item_url.startswith("//") else item_url,
+            "url": _absolute_url(item.get("itemUrl")),
+            "image": _absolute_url(item.get("image")),
         }
     return None
 
@@ -223,6 +230,7 @@ def fetch_from_ebay(query):
             "num_ratings": int(seller.get("feedbackScore") or 0),
             "pay_on_delivery": False,
             "url": item.get("itemWebUrl"),
+            "image": (item.get("image") or {}).get("imageUrl"),
         }
     return None
 

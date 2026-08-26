@@ -6,6 +6,16 @@ const formatKsh = (amount) =>
 export default function ProductCard({ listing }) {
   return (
     <div className="product-card">
+      {listing.image && (
+        <img
+          src={listing.image}
+          alt={listing.title}
+          className="product-card-image"
+          onError={(event) => {
+            event.target.style.display = "none";
+          }}
+        />
+      )}
       <h3>{listing.site}</h3>
       <p className="price">Ksh {formatKsh(listing.price)}</p>
       <p>
