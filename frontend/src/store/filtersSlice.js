@@ -3,8 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   weights: {
     rating: 0.35,
-    delivery_cost: 0.15,
-    trust: 0.1,
+    trust: 0.15,
   },
   priceRange: { min: 0, max: 0 },
 };

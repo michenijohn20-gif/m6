@@ -94,7 +94,7 @@ const FEATURES = [
   {
     metric: "01",
     title: "Marginal Benefit (MB%)",
-    body: "Weighted score combining price competitiveness, review quality, delivery cost, and payment risk.",
+    body: "Weighted score combining price competitiveness, review quality, and payment risk.",
     Icon: TagIcon,
   },
   {
@@ -106,7 +106,7 @@ const FEATURES = [
   {
     metric: "03",
     title: "Custom Weights",
-    body: "Adjust how much price, rating, or delivery matters to you. Rankings update instantly.",
+    body: "Adjust how much price, rating, or payment safety matters to you. Rankings update instantly.",
     Icon: SlidersIcon,
   },
 ];
@@ -124,7 +124,7 @@ export default function LandingPage() {
           <p>
             BlueCart ranks products from Amazon, AliExpress, and eBay
             using Marginal Benefit and Cost-Benefit scores that factor price,
-            delivery, ratings, and payment safety.
+            ratings, and payment safety.
           </p>
           <div className="hero-actions">
             <Link className="hero-primary" to="/search">

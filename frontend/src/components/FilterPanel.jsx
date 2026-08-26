@@ -5,10 +5,15 @@ import { rerankResults } from "../store/searchSlice";
 import { setPriceRange, setWeight } from "../store/filtersSlice";
 import "../styles/search.css";
 
-const LABELS = {
-  rating: "Rating",
-  delivery_cost: "Delivery cost",
-  trust: "Payment trust",
+const WEIGHTS_INFO = {
+  rating: {
+    label: "Product rating",
+    hint: "Higher = favor listings with better star ratings",
+  },
+  trust: {
+    label: "Payment safety",
+    hint: "Higher = favor listings that let you pay after delivery",
+  },
 };
 
 export default function FilterPanel() {
@@ -34,12 +39,16 @@ export default function FilterPanel() {
     dispatch(setWeight({ key, value: Number(value) }));
   };
 
+  const clamp = (value, low, high) => Math.min(Math.max(value, low), high);
+
   const handleMinPrice = (value) => {
-    dispatch(setPriceRange({ min: Math.min(Number(value), priceRange.max), max: priceRange.max }));
+    const next = clamp(Number(value), priceBounds.min, priceRange.max);
+    dispatch(setPriceRange({ min: next, max: priceRange.max }));
   };
 
   const handleMaxPrice = (value) => {
-    dispatch(setPriceRange({ min: priceRange.min, max: Math.max(Number(value), priceRange.min) }));
+    const next = clamp(Number(value), priceRange.min, priceBounds.max);
+    dispatch(setPriceRange({ min: priceRange.min, max: next }));
   };
 
   const handleApply = () => {
@@ -52,13 +61,26 @@ export default function FilterPanel() {
     dispatch(rerankResults({ listings: filtered, weights }));
   };
 
+  const span = priceBounds.max - priceBounds.min || 1;
+  const fillStart = ((priceRange.min - priceBounds.min) / span) * 100;
+  const fillEnd = ((priceRange.max - priceBounds.min) / span) * 100;
+
   return (
     <div className="filter-panel">
       <h4>Rank by what matters to you</h4>
+      <p className="filter-intro">
+        Drag a slider right to make that factor count for more in the ranking.
+      </p>
 
-      <div className="filter-row filter-row--range">
+      <div className="filter-block">
         <span className="filter-label">Price range</span>
-        <div className="price-range-inputs">
+        <div className="price-slider">
+          <div className="price-slider-track">
+            <div
+              className="price-slider-fill"
+              style={{ left: `${fillStart}%`, right: `${100 - fillEnd}%` }}
+            />
+          </div>
           <input
             type="range"
             min={priceBounds.min}
@@ -66,6 +88,7 @@ export default function FilterPanel() {
             step="1"
             value={priceRange.min}
             onChange={(event) => handleMinPrice(event.target.value)}
+            aria-label="Minimum price"
           />
           <input
             type="range"
@@ -74,16 +97,40 @@ export default function FilterPanel() {
             step="1"
             value={priceRange.max}
             onChange={(event) => handleMaxPrice(event.target.value)}
+            aria-label="Maximum price"
           />
         </div>
-        <span className="filter-value">
-          Ksh {priceRange.min.toLocaleString()} – Ksh {priceRange.max.toLocaleString()}
-        </span>
+        <div className="price-inputs">
+          <label>
+            Min
+            <input
+              type="number"
+              value={priceRange.min}
+              min={priceBounds.min}
+              max={priceRange.max}
+              onChange={(event) => handleMinPrice(event.target.value)}
+            />
+          </label>
+          <span className="price-inputs-sep">–</span>
+          <label>
+            Max
+            <input
+              type="number"
+              value={priceRange.max}
+              min={priceRange.min}
+              max={priceBounds.max}
+              onChange={(event) => handleMaxPrice(event.target.value)}
+            />
+          </label>
+        </div>
       </div>
 
       {Object.keys(weights).map((key) => (
-        <label key={key} className="filter-row">
-          <span className="filter-label">{LABELS[key]}</span>
+        <div key={key} className="filter-block">
+          <div className="filter-row">
+            <span className="filter-label">{WEIGHTS_INFO[key].label}</span>
+            <span className="filter-value">{Math.round(weights[key] * 100)}%</span>
+          </div>
           <input
             type="range"
             min="0"
@@ -91,10 +138,12 @@ export default function FilterPanel() {
             step="0.05"
             value={weights[key]}
             onChange={(event) => handleChange(key, event.target.value)}
+            aria-label={WEIGHTS_INFO[key].label}
           />
-          <span className="filter-value">{weights[key]}</span>
-        </label>
+          <p className="filter-hint">{WEIGHTS_INFO[key].hint}</p>
+        </div>
       ))}
+
       <button type="button" onClick={handleApply}>
         Apply filters
       </button>

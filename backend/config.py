@@ -13,7 +13,13 @@ class Config:
     )
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
+    # Different RapidAPI accounts can be subscribed to different listings, so
+    # each site's key defaults to the shared RAPIDAPI_KEY but can be
+    # overridden independently if e.g. Amazon and AliExpress come from
+    # separate accounts.
     RAPIDAPI_KEY = os.environ.get("RAPIDAPI_KEY", "")
+    RAPIDAPI_AMAZON_KEY = os.environ.get("RAPIDAPI_AMAZON_KEY", "") or RAPIDAPI_KEY
+    RAPIDAPI_ALIEXPRESS_KEY = os.environ.get("RAPIDAPI_ALIEXPRESS_KEY", "") or RAPIDAPI_KEY
     RAPIDAPI_AMAZON_HOST = os.environ.get(
         "RAPIDAPI_AMAZON_HOST", "real-time-amazon-data.p.rapidapi.com"
     )
